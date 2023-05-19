@@ -18,7 +18,7 @@ import com.example.hotelserver.entity.Tang;
 import com.example.hotelserver.service.TangService;
 
 @RestController
-@CrossOrigin(origins="http://localhost:3000")
+@CrossOrigin(origins="https://sama-hotel.netlify.app")
 @RequestMapping("/api/tang")
 public class TangController {
 	@Autowired

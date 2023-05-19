@@ -23,7 +23,7 @@ import com.example.hotelserver.entity.Tang;
 import com.example.hotelserver.service.PhongService;
 
 @RestController
-@CrossOrigin(origins="http://localhost:3000")
+@CrossOrigin(origins="https://sama-hotel.netlify.app")
 @RequestMapping("/api/phong")
 public class PhongController {
 	@Autowired

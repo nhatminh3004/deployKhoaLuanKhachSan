@@ -22,7 +22,7 @@ import com.example.hotelserver.entity.NhanVien;
 import com.example.hotelserver.service.BangPhanCongService;
 
 @RestController
-@CrossOrigin(origins="http://localhost:3000")
+@CrossOrigin(origins="https://sama-hotel.netlify.app")
 @RequestMapping("/api/bangPhanCong")
 public class BangPhanCongController {
 	@Autowired

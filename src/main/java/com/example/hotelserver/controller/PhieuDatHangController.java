@@ -20,7 +20,7 @@ import com.example.hotelserver.service.KhachHangService;
 import com.example.hotelserver.service.PhieuDatPhongService;
 
 @RestController
-@CrossOrigin(origins="http://localhost:3000")
+@CrossOrigin(origins="https://sama-hotel.netlify.app")
 @RequestMapping("/api/phieuDatPhong")
 public class PhieuDatHangController {
 	@Autowired

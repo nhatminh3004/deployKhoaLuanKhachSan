@@ -18,7 +18,7 @@ import com.example.hotelserver.entity.LoaiPhong;
 import com.example.hotelserver.service.LoaiPhongService;
 
 @RestController
-@CrossOrigin(origins="http://localhost:3000")
+@CrossOrigin(origins="https://sama-hotel.netlify.app")
 @RequestMapping("/api/loaiPhong")
 public class LoaiPhongController {
 	@Autowired

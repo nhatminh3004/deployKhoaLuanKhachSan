@@ -21,7 +21,7 @@ import com.example.hotelserver.dto.TaoHoaDonRequestDto;
 import com.example.hotelserver.service.HoaDonService;
 
 @RestController
-@CrossOrigin(origins="http://localhost:3000")
+@CrossOrigin(origins="https://sama-hotel.netlify.app")
 @RequestMapping("/api/hoaDon")
 public class HoaDonController {
 	@Autowired

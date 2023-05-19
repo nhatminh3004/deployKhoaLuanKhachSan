@@ -22,7 +22,7 @@ import com.example.hotelserver.service.KhachHangService;
 import lombok.RequiredArgsConstructor;
 
 @RestController
-@CrossOrigin(origins="http://localhost:3000")
+@CrossOrigin(origins="https://sama-hotel.netlify.app")
 @RequestMapping(path= "/api/khachhang")
 @RequiredArgsConstructor
 public class KhachHangController {

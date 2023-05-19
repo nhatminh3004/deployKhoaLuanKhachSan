@@ -20,7 +20,7 @@ import com.example.hotelserver.service.AuthenticationService;
 import lombok.RequiredArgsConstructor;
 
 @RestController
-@CrossOrigin(origins="http://localhost:3000")
+@CrossOrigin(origins="https://sama-hotel.netlify.app")
 @RequestMapping(path= "/api/auth")
 @RequiredArgsConstructor
 public class UserController {

@@ -14,7 +14,7 @@ import com.example.hotelserver.dto.BangLuongDto;
 import com.example.hotelserver.service.BangLuongService;
 
 @RestController
-@CrossOrigin(origins="http://localhost:3000")
+@CrossOrigin(origins="https://sama-hotel.netlify.app")
 @RequestMapping("/api/bangLuong")
 public class BangLuongController {
 	@Autowired

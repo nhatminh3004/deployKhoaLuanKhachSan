@@ -23,7 +23,7 @@ import com.example.hotelserver.service.DichVuService;
 import lombok.RequiredArgsConstructor;
 
 @RestController
-@CrossOrigin(origins="http://localhost:3000")
+@CrossOrigin(origins="https://sama-hotel.netlify.app")
 @RequestMapping(path= "/api/dichvu")
 @RequiredArgsConstructor
 public class DichVuController {

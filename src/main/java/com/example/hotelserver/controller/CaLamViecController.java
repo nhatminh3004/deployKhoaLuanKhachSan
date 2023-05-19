@@ -19,7 +19,7 @@ import com.example.hotelserver.entity.CaLamViec;
 import com.example.hotelserver.service.CaLamViecService;
 
 @RestController
-@CrossOrigin(origins="http://localhost:3000")
+@CrossOrigin(origins="https://sama-hotel.netlify.app")
 @RequestMapping("/api/caLamViec")
 public class CaLamViecController {
 	@Autowired

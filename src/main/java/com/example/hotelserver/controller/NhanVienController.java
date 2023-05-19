@@ -36,7 +36,7 @@ import com.example.hotelserver.service.NhanVienService;
 import lombok.RequiredArgsConstructor;
 
 @RestController
-@CrossOrigin(origins="http://localhost:3000")
+@CrossOrigin(origins="https://sama-hotel.netlify.app")
 @RequestMapping(path= "/api/nhanvien")
 @RequiredArgsConstructor
 public class NhanVienController {
