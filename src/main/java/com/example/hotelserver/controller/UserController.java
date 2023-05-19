@@ -99,6 +99,10 @@ public class UserController {
 
 		return new ResponseEntity<>(result, HttpStatus.OK);
 	}
+	@GetMapping("/test")
+	public String showHello(){
+		return "Connect Success";
+	}
 	@PostMapping("/forgotPassWord")
 	public ResponseEntity<Boolean> forgotPassWord(@RequestBody Map<String, Object> request) {
 		boolean result = false;
@@ -114,9 +118,6 @@ public class UserController {
 
 		return new ResponseEntity<>(result, HttpStatus.OK);
 	}
-	@GetMapping("/test")
-	public String showHello(){
-		return "Connect Success";
-	}
+
 	
 }

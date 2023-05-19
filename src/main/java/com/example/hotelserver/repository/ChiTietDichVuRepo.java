@@ -14,7 +14,7 @@ import java.util.Date;
 import java.util.List;
 
 @Repository
-public interface ChiTietDichVuRepo extends JpaRepository<ChiTietDichVu, ChiTietDichVuPK> {
+public interface ChiTietDichVuRepo extends JpaRepository<ChiTietDichVu, Long> {
     @Query(name = "thongKeDichVuWithSoLuongDichVu", nativeQuery = true)
     List<ThongKeSoLanDatDichVuDto> getThongKeSoLanDatDichVu(@Param("start") Date start
             , @Param("end") Date end);

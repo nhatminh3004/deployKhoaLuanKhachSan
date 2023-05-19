@@ -36,6 +36,24 @@ public interface HoaDonRepo extends JpaRepository<HoaDon, Long>{
 			"on ctdv.ma_dich_vu = dv.ma_dich_vu join loai_dich_vu ldv on dv.ma_loai_dich_vu = ldv.ma_loai_dich_vu where ctdv.ma_hoa_don= :maHoaDon")
 	List<Map<String, Object>> layChiTietDichVuTuMaHoaDon(@Param("maHoaDon") long maHoaDon);
 	
+	@Query(nativeQuery = true, value = "select ctdv.ma_chi_tiet_dich_vu as maChiTietDichVu, ctdv.ma_dich_vu as maDichVu" +
+			", dv.ten_dich_vu as tenDichVu, dv.gia_dich_vu as giaDichVu"
+			+ ", ctdv.so_luong as soLuong,ldv.don_vi_loai_dich_vu as tenLoaiDichVu "
+			+ ", ctdv.ma_phong as maPhong " +
+			"from chi_tiet_dich_vu ctdv " +
+			"inner join dich_vu dv " +
+			"on ctdv.ma_dich_vu = dv.ma_dich_vu join loai_dich_vu ldv on dv.ma_loai_dich_vu = ldv.ma_loai_dich_vu "
+			+ "where ctdv.ma_hoa_don= :maHoaDon order by ctdv.ma_phong")
+	List<Map<String, Object>> layChiTietPhongDichVuTuMaHoaDon(@Param("maHoaDon") long maHoaDon);
+	
+	@Query(nativeQuery = true, value = "select ctdv.ma_chi_tiet_dich_vu as maChiTietDichVu, ctdv.ma_dich_vu as maDichVu" +
+			", dv.ten_dich_vu as tenDichVu, dv.gia_dich_vu as giaDichVu"
+			+ ", ctdv.so_luong as soLuong,ldv.don_vi_loai_dich_vu as tenLoaiDichVu " +
+			"from chi_tiet_dich_vu ctdv " +
+			"inner join dich_vu dv " +
+			"on ctdv.ma_dich_vu = dv.ma_dich_vu join loai_dich_vu ldv on dv.ma_loai_dich_vu = ldv.ma_loai_dich_vu where ctdv.ma_hoa_don= :maHoaDon and ctdv.ma_phong = :maPhong")
+	List<Map<String, Object>> layChiTietDichVuTuMaHoaDonVaMaPhong(@Param("maHoaDon") long maHoaDon, @Param("maPhong") String maPhong);
+	
 	@Query(nativeQuery = true, value = "select * from hoa_don "
 			+ "where tien_nhan = 0 "
 			+ "order by ngay_tra_phong DESC")

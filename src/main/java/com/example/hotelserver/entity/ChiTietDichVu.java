@@ -1,8 +1,20 @@
 package com.example.hotelserver.entity;
 
 import com.example.hotelserver.dto.ThongKeSoLanDatDichVuDto;
-import com.example.hotelserver.dto.ThongKeSoLanDatPhongDto;
-import jakarta.persistence.*;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.ColumnResult;
+import jakarta.persistence.ConstructorResult;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.NamedNativeQuery;
+import jakarta.persistence.SqlResultSetMapping;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -30,15 +42,17 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor @NoArgsConstructor
 @Entity
-@IdClass(ChiTietDichVuPK.class)
 @Table(name = "chi_tiet_dich_vu")
 public class ChiTietDichVu {
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "ma_chi_tiet_dich_vu")
+	private long maChiTietDichVu;
+	
 	@ManyToOne
 	@JoinColumn(name="ma_hoa_don")
 	private HoaDon hoaDon;
 	
-	@Id
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="ma_dich_vu")
 	private DichVu dichVu;
@@ -46,5 +60,7 @@ public class ChiTietDichVu {
 	@Column(name = "so_luong")
 	private int soLuong;
 	
-	
+	@ManyToOne
+	@JoinColumn(name="ma_phong")
+	private Phong phong;
 }
