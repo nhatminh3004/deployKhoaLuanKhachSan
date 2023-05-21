@@ -868,4 +868,59 @@ public class HoaDonServiceImpl implements HoaDonService{
 		}
 		return dsHoaDonDto;
 	}
+	@Override
+	public List<HoaDonPhongDichVuDto> layHoaDonPhongCCCD(String cccd) {
+		List<HoaDonPhongDichVuDto> dsHoaDonDto = new ArrayList<>();
+		try {
+			KhachHang khachHang = khachHangRepo.timKhachHangBangCCCD(cccd);
+			if (khachHang != null) {
+				List<HoaDon> dsHoaDon = hoaDonRepo.layTatCaHoaDonTheoKhach(khachHang.getMaKhachHang());
+				for (HoaDon hoaDon : dsHoaDon) {
+					HoaDonPhongDichVuDto hoaDonDto = HoaDonPhongDichVuDto.builder()
+							.maHoaDon(hoaDon.getMaHoaDon())
+							.ngayLap(hoaDon.getNgayLap())
+							.ngayNhanPhong(hoaDon.getNgayNhanPhong())
+							.ngayTraPhong(hoaDon.getNgayTraPhong())
+							.tienNhan(hoaDon.getTienNhan())
+							.phieuDatPhong(hoaDon.getPhieuDatPhong())
+							.nhanVien(hoaDon.getNhanVien())
+							.khachHang(hoaDon.getKhachHang())
+							.build();
+					List<Phong> dsPhong = new ArrayList<>();
+					List<String> dsMaPhong = hoaDonRepo.layMaPhongTuMaHoaDon(hoaDon.getMaHoaDon());
+					if (!dsMaPhong.isEmpty()) {
+						for (String maPhong : dsMaPhong) {
+							Phong phong = phongRepo.findById(maPhong).get();
+							dsPhong.add(phong);
+						}
+					}
+					List<PhongResponseDto> phongResponseDtos = new ArrayList<>();
+					if (!dsPhong.isEmpty()) {
+						for (Phong phong : dsPhong) {
+							phongResponseDtos.add(convertPhongToPhongDto(phong));
+						}
+					}
+					List<Map<String, Object>> listObject = hoaDonRepo.layChiTietPhongDichVuTuMaHoaDon(hoaDon.getMaHoaDon());
+					List<ChiTietPhongDichVuDto> dsChiTietDichVuDto = new ArrayList<>();
+					if (!listObject.isEmpty()) {
+						for (Map<String, Object> obj : listObject) {
+							ChiTietPhongDichVuDto chiTietDichVuDto = new ChiTietPhongDichVuDto(
+									Long.parseLong(obj.get("maChiTietDichVu").toString()),
+									Long.parseLong(obj.get("maDichVu").toString())
+									, obj.get("tenDichVu").toString(), Double.parseDouble(obj.get("giaDichVu").toString())
+									, Integer.parseInt(obj.get("soLuong").toString()),  obj.get("tenLoaiDichVu").toString()
+									, obj.get("maPhong").toString());
+							dsChiTietDichVuDto.add(chiTietDichVuDto);
+						}
+					}
+					hoaDonDto.setDsPhong(phongResponseDtos);
+					hoaDonDto.setDsChiTietDichVuDto(dsChiTietDichVuDto);
+					dsHoaDonDto.add(hoaDonDto);
+				}
+			}
+		} catch (Exception e) {
+			System.out.println("Error at layPhieuDatPhong: " + e);
+		}
+		return dsHoaDonDto;
+	}
 }

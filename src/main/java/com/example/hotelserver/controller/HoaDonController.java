@@ -113,4 +113,26 @@ public class HoaDonController {
 //		List<PhieuDatPhongDto> results = phieuDatPhongService.layPhieuDatPhongTheoNgay();
 		return new ResponseEntity<List<HoaDonPhongDichVuDto>>(hoaDonService.layHetHoaDonPhong(), HttpStatus.OK);
 	}
+	
+	@PostMapping("/searchHoaDonPhong")
+	public ResponseEntity<List<HoaDonPhongDichVuDto>> timHoaDonPhong(@RequestBody List<Map<String, Object>> request) {
+		List<HoaDonPhongDichVuDto> results = new ArrayList<>();
+		if (!request.isEmpty()) {
+			for (Map<String, Object> map : request) {
+				if (map.get("theo").toString().equals("Theo mã hóa đơn") && !map.get("keyword").toString().trim().equals("")) {
+					results = hoaDonService.timHoaDonPhongTheoMa(Long.parseLong(map.get("keyword").toString()));
+					if (results != null && !results.isEmpty()) {
+						return new ResponseEntity<List<HoaDonPhongDichVuDto>>(results, HttpStatus.OK);
+					}
+				} else if (map.get("theo").toString().equals("Theo cccd") && !map.get("keyword").toString().trim().equals("")) {
+					results = hoaDonService.layHoaDonPhongCCCD(map.get("keyword").toString());
+					if (results != null && !results.isEmpty()) {
+						return new ResponseEntity<List<HoaDonPhongDichVuDto>>(results, HttpStatus.OK);
+					}
+				}
+			}
+//			results = phongService.timPhongCustomQuery(query);
+ 		}
+		return new ResponseEntity<List<HoaDonPhongDichVuDto>>(results, HttpStatus.OK);
+	}
 }

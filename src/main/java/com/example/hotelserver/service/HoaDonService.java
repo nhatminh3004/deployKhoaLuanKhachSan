@@ -3,12 +3,12 @@ package com.example.hotelserver.service;
 import java.util.List;
 import java.util.Map;
 
-import com.example.hotelserver.dto.DatDichVuDto;
+import org.springframework.web.bind.annotation.RequestBody;
+
 import com.example.hotelserver.dto.DatDichVuPhongDto;
 import com.example.hotelserver.dto.HoaDonDto;
 import com.example.hotelserver.dto.HoaDonPhongDichVuDto;
 import com.example.hotelserver.dto.TaoHoaDonRequestDto;
-import org.springframework.web.bind.annotation.RequestBody;
 
 public interface HoaDonService {
 	boolean themHoaDon(TaoHoaDonRequestDto hoaDonDto);
@@ -27,4 +27,5 @@ public interface HoaDonService {
 	List<HoaDonPhongDichVuDto> layHoaDonPhongTheoNgay();
 	List<HoaDonPhongDichVuDto> timHoaDonPhongTheoMa(long maHoaDon);
 	List<HoaDonPhongDichVuDto> layHetHoaDonPhong();
+	List<HoaDonPhongDichVuDto> layHoaDonPhongCCCD(String cccd);
 }	
