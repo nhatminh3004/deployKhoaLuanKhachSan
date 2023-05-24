@@ -4,15 +4,14 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-import com.example.hotelserver.dto.DanhSachSoLanDatPhongThanhCongVaMaKhachHangDto;
-import com.example.hotelserver.dto.DanhSachSoLanHuyDatPhongVaMaKhachHangDto;
-import com.example.hotelserver.dto.ThongKeSoLanDatDichVuDto;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import com.example.hotelserver.dto.DanhSachSoLanDatPhongThanhCongVaMaKhachHangDto;
+import com.example.hotelserver.dto.DanhSachSoLanHuyDatPhongVaMaKhachHangDto;
 import com.example.hotelserver.entity.HoaDon;
 
 import jakarta.transaction.Transactional;
@@ -88,4 +87,22 @@ public interface HoaDonRepo extends JpaRepository<HoaDon, Long>{
 	@Query(nativeQuery = true, value = "select * from hoa_don "
 			+ "where ma_khach_hang = :maKhachHang")
 	List<HoaDon> layTatCaHoaDonTheoKhach(@Param("maKhachHang") int maKhachHang);
+	
+	
+	@Query(nativeQuery = true, value = "select ma_hoa_don from hoa_don hd "
+			+ "where hd.tien_nhan > 0 and ma_hoa_don = :maHoaDon "
+			+ "and (hd.ngay_nhan_phong between :ngayNhanPhong and :ngayTraPhong "
+			+ "or hd.ngay_tra_phong between :ngayNhanPhong and :ngayTraPhong "
+			+ "or :ngayNhanPhong between hd.ngay_nhan_phong and hd.ngay_tra_phong "
+			+ "or :ngayTraPhong between hd.ngay_nhan_phong and hd.ngay_tra_phong)")
+	Long layMaHoaDonTheoNgayNhanNgayTra(@Param("ngayNhanPhong") Date ngayNhanPhong
+			, @Param("ngayTraPhong") Date ngayTraPhong, @Param("maHoaDon") long maHoaDon);
+
+	@Query(nativeQuery = true, value = "select * from hoa_don "
+			+ "where ma_phieu_dat_phong = :maPhieuDatPhong")
+	Long layMaHoaDonTheoPhieuDat(@Param("maPhieuDatPhong") long maPhieuDatPhong);
+	
+	@Query(nativeQuery = true, value = "select tien_nhan from hoa_don "
+			+ "where ma_hoa_don = :maHoaDon")
+	Double layTienNhanTheoMaHD(@Param("maHoaDon") long maHoaDon);
 }

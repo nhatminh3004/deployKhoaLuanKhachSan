@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.hotelserver.dto.PhongResponseDto;
 import com.example.hotelserver.entity.Phong;
+import com.example.hotelserver.repository.HoaDonRepo;
 import com.example.hotelserver.repository.PhieuDatPhongRepo;
 import com.example.hotelserver.repository.PhongRepo;
 
@@ -16,10 +17,13 @@ import com.example.hotelserver.repository.PhongRepo;
 public class PhongServiceImpl implements PhongService{
 	@Autowired
 	private PhongRepo phongRepo;
-	
+
 	@Autowired
 	private PhieuDatPhongRepo phieuDatPhongRepo;
-	
+
+	@Autowired
+	private HoaDonRepo hoaDonRepo;
+
 	@Override
 	public List<PhongResponseDto> layTatCaPhongSapXepTheoTrangThai(Date ngayNhanPhong, Date ngayTraPhong) {
 		List<Phong> rooms = phongRepo.getRoomsOrderByState();
@@ -39,21 +43,59 @@ public class PhongServiceImpl implements PhongService{
 			List<Long> maPhieuDatPhongs = phieuDatPhongRepo.layMaPhieuTheoNgayNhanNgayTra(ngayNhanPhong, ngayTraPhong);
 			if (maPhieuDatPhongs != null && !maPhieuDatPhongs.isEmpty()) {
 				for (Long maPhieuDatPhong : maPhieuDatPhongs) {
-					List<String> exMaPhong = phieuDatPhongRepo.layMaPhongTuMaPhieu(maPhieuDatPhong);
-					if (!exMaPhong.isEmpty()) {
-						for (String maPhong : exMaPhong) {
-							for (int i = 0; i < phongDtos.size(); i++) {
-								if (phongDtos.get(i).getMaPhong().equals(maPhong)) {
-									phongDtos.remove(i);
-									break;
+					Long maHoaDon = hoaDonRepo.layMaHoaDonTheoPhieuDat(maPhieuDatPhong);
+					if (maHoaDon != null && maHoaDon > 0) {
+						Double tienNhan = hoaDonRepo.layTienNhanTheoMaHD(maHoaDon);
+						if (tienNhan > 0) {
+							Long maHoaDonTheoNgay = hoaDonRepo.layMaHoaDonTheoNgayNhanNgayTra(ngayNhanPhong, ngayTraPhong, maHoaDon); 
+							if (maHoaDonTheoNgay != null && maHoaDonTheoNgay > 0) {
+								List<String> exMaPhong = hoaDonRepo.layMaPhongTuMaHoaDon(maHoaDonTheoNgay);
+								if (!exMaPhong.isEmpty()) {
+									for (String maPhong : exMaPhong) {
+										for (int i = 0; i < phongDtos.size(); i++) {
+											if (phongDtos.get(i).getMaPhong().equals(maPhong)) {
+												phongDtos.remove(i);
+												break;
+											}
+										}
+									}
+
+								}
+							}
+						} else {
+							List<String> exMaPhong = phieuDatPhongRepo.layMaPhongTuMaPhieu(maPhieuDatPhong);
+							if (!exMaPhong.isEmpty()) {
+								for (String maPhong : exMaPhong) {
+									for (int i = 0; i < phongDtos.size(); i++) {
+										if (phongDtos.get(i).getMaPhong().equals(maPhong)) {
+											phongDtos.remove(i);
+											break;
+										}
+									}
+								}
+							}
+						}
+						
+						
+					} else {
+						List<String> exMaPhong = phieuDatPhongRepo.layMaPhongTuMaPhieu(maPhieuDatPhong);
+						if (!exMaPhong.isEmpty()) {
+							for (String maPhong : exMaPhong) {
+								for (int i = 0; i < phongDtos.size(); i++) {
+									if (phongDtos.get(i).getMaPhong().equals(maPhong)) {
+										phongDtos.remove(i);
+										break;
+									}
 								}
 							}
 						}
 					}
-					
+
+
 				}
-				
 			}
+
+
 		}
 		return phongDtos;
 	}
@@ -84,7 +126,7 @@ public class PhongServiceImpl implements PhongService{
 			System.out.println("Error at PhongServiceImpl" + e);
 			return false;
 		}
-		
+
 		return true;
 	}
 
