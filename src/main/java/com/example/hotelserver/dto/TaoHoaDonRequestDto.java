@@ -30,4 +30,7 @@ public class TaoHoaDonRequestDto {
 	private long maPhieuDatPhong;
 	private int maKhachHang;
 	private long maNhanVien;
+	private double tongTienDichVu;
+	private double tongTienPhong;
+	private double tongTien;
 }

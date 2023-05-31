@@ -64,7 +64,7 @@ public class HoaDonServiceImpl implements HoaDonService{
 				ChiTietHoaDon ct = new ChiTietHoaDon(null, new Phong(ma
 						, null, false, null, null, null, null, 0, false, false, 0, 0));
 				if (hoaDonDto.getMaHoaDon() != 0) {
-					ct.setHoaDon(new HoaDon(hoaDonDto.getMaHoaDon(), null, null, null, 0, null, null, null, null, null));
+					ct.setHoaDon(new HoaDon(hoaDonDto.getMaHoaDon(), null, null, null, 0, 0, 0, 0, null, null, null, null, null));
 				}
 				dsChiTietHoaDon.add(ct);
 			}
@@ -76,6 +76,9 @@ public class HoaDonServiceImpl implements HoaDonService{
 				, hoaDonDto.getNgayNhanPhong()
 				, hoaDonDto.getNgayTraPhong()
 				, hoaDonDto.getTienNhan()
+				, hoaDonDto.getTongTienDichVu()
+				, hoaDonDto.getTongTienPhong()
+				, hoaDonDto.getTongTien()
 				, dsChiTietHoaDon, null
 				, new PhieuDatPhong(hoaDonDto.getMaPhieuDatPhong(), null, 0, null, null, null, null, null, null) 
 				, tempKH
@@ -418,7 +421,7 @@ public class HoaDonServiceImpl implements HoaDonService{
 							chiTietDichVuRepo.save(
 									new ChiTietDichVu(dsChiTietDichVuDto.get(j).getMaChiTietDichVu(), new HoaDon(maHoaDon
 									, null, null, null
-									, 0, null, null
+									, 0, 0, 0, 0, null, null
 									, null, null, null),
 									new DichVu(datDichVuDtos.get(i).getMaDichVu()
 											, null, 0, 0, null), datDichVuDtos.get(i).getSoLuongTong()
@@ -697,6 +700,9 @@ public class HoaDonServiceImpl implements HoaDonService{
 						.ngayNhanPhong(hoaDon.getNgayNhanPhong())
 						.ngayTraPhong(hoaDon.getNgayTraPhong())
 						.tienNhan(hoaDon.getTienNhan())
+						.tongTien(hoaDon.getTongTien())
+						.tongTienDichVu(hoaDon.getTongTienDichVu())
+						.tongTienPhong(hoaDon.getTongTienPhong())
 						.phieuDatPhong(hoaDon.getPhieuDatPhong())
 						.nhanVien(hoaDon.getNhanVien())
 						.build();
@@ -765,6 +771,9 @@ public class HoaDonServiceImpl implements HoaDonService{
 						.ngayNhanPhong(hoaDon.getNgayNhanPhong())
 						.ngayTraPhong(hoaDon.getNgayTraPhong())
 						.tienNhan(hoaDon.getTienNhan())
+						.tongTien(hoaDon.getTongTien())
+						.tongTienDichVu(hoaDon.getTongTienDichVu())
+						.tongTienPhong(hoaDon.getTongTienPhong())
 						.phieuDatPhong(hoaDon.getPhieuDatPhong())
 						.nhanVien(hoaDon.getNhanVien())
 						.build();
@@ -828,6 +837,9 @@ public class HoaDonServiceImpl implements HoaDonService{
 						.ngayNhanPhong(hoaDon.getNgayNhanPhong())
 						.ngayTraPhong(hoaDon.getNgayTraPhong())
 						.tienNhan(hoaDon.getTienNhan())
+						.tongTien(hoaDon.getTongTien())
+						.tongTienDichVu(hoaDon.getTongTienDichVu())
+						.tongTienPhong(hoaDon.getTongTienPhong())
 						.phieuDatPhong(hoaDon.getPhieuDatPhong())
 						.nhanVien(hoaDon.getNhanVien())
 						.build();
@@ -882,6 +894,9 @@ public class HoaDonServiceImpl implements HoaDonService{
 							.ngayNhanPhong(hoaDon.getNgayNhanPhong())
 							.ngayTraPhong(hoaDon.getNgayTraPhong())
 							.tienNhan(hoaDon.getTienNhan())
+							.tongTien(hoaDon.getTongTien())
+							.tongTienDichVu(hoaDon.getTongTienDichVu())
+							.tongTienPhong(hoaDon.getTongTienPhong())
 							.phieuDatPhong(hoaDon.getPhieuDatPhong())
 							.nhanVien(hoaDon.getNhanVien())
 							.khachHang(hoaDon.getKhachHang())

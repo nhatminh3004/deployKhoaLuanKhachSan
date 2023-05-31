@@ -60,6 +60,16 @@ public class HoaDon {
 	
 	@Column(name = "tien_nhan")
 	private double tienNhan;
+	
+	@Column(name = "tong_tien_dich_vu")
+	private double tongTienDichVu;
+	
+	@Column(name = "tong_tien_phong")
+	private double tongTienPhong;
+	
+	@Column(name = "tong_tien")
+	private double tongTien;
+	
 //	@Column(name = "hinh_thuc_thanh_toan")
 //	private String hinhThucThanhToan;
 	

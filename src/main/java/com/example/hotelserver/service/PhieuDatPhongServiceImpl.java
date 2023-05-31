@@ -211,4 +211,43 @@ public class PhieuDatPhongServiceImpl implements PhieuDatPhongService {
 		}
 		return dsPhieuDatPhongDto;
 	}
+	
+	@Override
+	public List<PhieuDatPhongDto> layPhieuDatPhongCapNhatTheoNgayDat() {
+		List<PhieuDatPhongDto> dsPhieuDatPhongDto = new ArrayList<>();
+		try {
+			List<PhieuDatPhong> dsPhieuDatPhong = phieuDatPhongRepo.layPhieuSapXepTheoNgayDatCapNhat();
+			for (PhieuDatPhong phieuDatPhong : dsPhieuDatPhong) {
+				PhieuDatPhongDto phieuDatPhongDto = PhieuDatPhongDto.builder()
+						.maPhieuDatPhong(phieuDatPhong.getMaPhieuDatPhong())
+						.ngayDatPhong(phieuDatPhong.getNgayDatPhong())
+						.giamGia(phieuDatPhong.getGiamGia())
+						.ghiChuDatPhong(phieuDatPhong.getGhiChuDatPhong())
+						.ngayNhanPhong(phieuDatPhong.getNgayNhanPhong())
+						.ngayTraPhong(phieuDatPhong.getNgayTraPhong())
+						.trangThaiDatPhong(phieuDatPhong.getTrangThaiDatPhong())
+						.khachHang(phieuDatPhong.getKhachHang())
+						.build();
+				List<Phong> dsPhong = new ArrayList<>();
+				List<String> dsMaPhong = phieuDatPhongRepo.layMaPhongTuMaPhieu(phieuDatPhong.getMaPhieuDatPhong());
+				if (!dsMaPhong.isEmpty()) {
+					for (String maPhong : dsMaPhong) {
+						Phong phong = phongRepo.findById(maPhong).get();
+						dsPhong.add(phong);
+					}
+				}
+				List<PhongResponseDto> phongResponseDtos = new ArrayList<>();
+				if (!dsPhong.isEmpty()) {
+					for (Phong phong : dsPhong) {
+						phongResponseDtos.add(convertPhongToPhongDto(phong));
+					}
+				}
+				phieuDatPhongDto.setDsPhong(phongResponseDtos);
+				dsPhieuDatPhongDto.add(phieuDatPhongDto);
+			}
+		} catch (Exception e) {
+			System.out.println("Error at layPhieuDatPhong: " + e);
+		}
+		return dsPhieuDatPhongDto;
+	}
 }

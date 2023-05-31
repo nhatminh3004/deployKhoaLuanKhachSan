@@ -71,5 +71,9 @@ public class PhieuDatHangController {
 		}
 		return new ResponseEntity<Boolean>(false, HttpStatus.OK);
 	}
-
+	@GetMapping("/forUpdate")
+	public ResponseEntity<List<PhieuDatPhongDto>> layPhieuDatPhongCapNhatTheoNgay() {
+//		List<PhieuDatPhongDto> results = phieuDatPhongService.layPhieuDatPhongTheoNgay();
+		return new ResponseEntity<List<PhieuDatPhongDto>>(phieuDatPhongService.layPhieuDatPhongCapNhatTheoNgayDat(), HttpStatus.OK);
+	}
 }

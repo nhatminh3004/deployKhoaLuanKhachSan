@@ -10,5 +10,5 @@ public interface PhieuDatPhongService {
 	List<PhieuDatPhongDto> layPhieuDatPhong();
 	List<PhieuDatPhongDto> layPhieuDatPhongTheoNgay();
 	List<PhieuDatPhongDto> layPhieuDatPhongTheoNgayCCCD(String cccd);
-
+	List<PhieuDatPhongDto> layPhieuDatPhongCapNhatTheoNgayDat();
 }

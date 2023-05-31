@@ -36,4 +36,9 @@ public interface PhieuDatPhongRepo extends JpaRepository<PhieuDatPhong, Long> {
 			+ "where trang_thai_dat_phong = 'MOI_DAT' and ma_khach_hang = :maKhachHang "
 			+ "order by ngay_nhan_phong")
 	List<PhieuDatPhong> layPhieuSapXepTheoNgayTrangThaiMoiDatTheoMaKH(@Param("maKhachHang") int maKhachHang);
+	
+	@Query(nativeQuery = true, value = "select * from phieu_dat_phong "
+			+ "where trang_thai_dat_phong != 'MOI_DAT' and trang_thai_dat_phong != 'HUY' "
+			+ "order by ngay_dat_phong DESC")
+	List<PhieuDatPhong> layPhieuSapXepTheoNgayDatCapNhat();
 }

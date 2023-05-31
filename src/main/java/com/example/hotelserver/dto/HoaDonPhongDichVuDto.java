@@ -32,4 +32,6 @@ public class HoaDonPhongDichVuDto {
 	private NhanVien nhanVien;
 	private List<ChiTietPhongDichVuDto> dsChiTietDichVuDto;
 	private List<PhongResponseDto> dsPhong;
-}
+	private double tongTienDichVu;
+	private double tongTienPhong;
+	private double tongTien;}

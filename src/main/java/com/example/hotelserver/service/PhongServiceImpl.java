@@ -47,21 +47,21 @@ public class PhongServiceImpl implements PhongService{
 					if (maHoaDon != null && maHoaDon > 0) {
 						Double tienNhan = hoaDonRepo.layTienNhanTheoMaHD(maHoaDon);
 						if (tienNhan > 0) {
-							Long maHoaDonTheoNgay = hoaDonRepo.layMaHoaDonTheoNgayNhanNgayTra(ngayNhanPhong, ngayTraPhong, maHoaDon); 
-							if (maHoaDonTheoNgay != null && maHoaDonTheoNgay > 0) {
-								List<String> exMaPhong = hoaDonRepo.layMaPhongTuMaHoaDon(maHoaDonTheoNgay);
-								if (!exMaPhong.isEmpty()) {
-									for (String maPhong : exMaPhong) {
-										for (int i = 0; i < phongDtos.size(); i++) {
-											if (phongDtos.get(i).getMaPhong().equals(maPhong)) {
-												phongDtos.remove(i);
-												break;
-											}
-										}
-									}
-
-								}
-							}
+//							Long maHoaDonTheoNgay = hoaDonRepo.layMaHoaDonTheoNgayNhanNgayTra(ngayNhanPhong, ngayTraPhong, maHoaDon); 
+//							if (maHoaDonTheoNgay != null && maHoaDonTheoNgay > 0) {
+//								List<String> exMaPhong = hoaDonRepo.layMaPhongTuMaHoaDon(maHoaDonTheoNgay);
+//								if (!exMaPhong.isEmpty()) {
+//									for (String maPhong : exMaPhong) {
+//										for (int i = 0; i < phongDtos.size(); i++) {
+//											if (phongDtos.get(i).getMaPhong().equals(maPhong)) {
+//												phongDtos.remove(i);
+//												break;
+//											}
+//										}
+//									}
+//
+//								}
+//							}
 						} else {
 							List<String> exMaPhong = phieuDatPhongRepo.layMaPhongTuMaPhieu(maPhieuDatPhong);
 							if (!exMaPhong.isEmpty()) {
