@@ -110,6 +110,7 @@ public class HoaDonServiceImpl implements HoaDonService{
 //				List<HoaDon> dsHoaDon = hoaDonRepo.layHoaDonDaThanhToanTheoNgayCuThe(start,end);
 				List<HoaDon> dsHoaDon = hoaDonRepo.layHoaDonDaThanhToanTheoNam(year);
 				for (HoaDon hoaDon : dsHoaDon) {
+					System.out.println(hoaDon.getNgayLap()+": "+hoaDon.getTongTien());
 					KhachHang khachHang = khachHangRepo.findById(hoaDon.getKhachHang().getMaKhachHang()).get();
 					HoaDonDto hoaDonDto = HoaDonDto.builder()
 							.maHoaDon(hoaDon.getMaHoaDon())
